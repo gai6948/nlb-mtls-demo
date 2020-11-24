@@ -10,7 +10,7 @@ Mutual TLS authentication means both client and server validate the identity of 
 
 While [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/application-load-balancer/?nc=sn&loc=2&dn=2) supports many authentication methods like SAML, OpenID Connect and Cognito, it currently does not offer client-side certificate authentication.
 
-On the other hand, API Gateway [recently announced suport for MTLS](https://aws.amazon.com/blogs/compute/introducing-mutual-tls-authentication-for-amazon-api-gateway/). However, API Gateway has inherent limits like 30-second timeout, max payload size limit, etc.
+On the other hand, API Gateway [recently announced suport for MTLS](https://aws.amazon.com/blogs/compute/introducing-mutual-tls-authentication-for-amazon-api-gateway/). However, API Gateway has inherent limits like 29-second timeout, max payload size limit, etc.
 
 For a more flexible way to enforce two-way certificate-based authentication, we can set up Nginx on EC2 as reverse proxy, in front of our private APIs, and this is what I will show you.
 
