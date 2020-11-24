@@ -4,7 +4,7 @@ This example shows you how to set up Nginx on EC2s as a reverse proxy and use mu
 
 ## Why Mutual TLS Authentication?
 
-Mutual TLS authentication means both client and server validate the identity of each other by looking at the certificate they present, it is normally used as an authentication method for internal applications that do *** NOT *** have a lot of users.
+Mutual TLS authentication means both client and server validate the identity of each other by looking at the certificate they present, it is normally used as an authentication method for internal applications that do ***NOT*** have a lot of users.
 
 ## Why self-hosted Nginx instead of API gateway / ALB ?
 
@@ -76,7 +76,7 @@ In the `ec2` folder, we have the `nginx.conf` file which is almost complete, onl
 - For the port 443 listener, we display the `index.html` to our users telling them they have successfully authenticated, in fact they only see this page if they possess the valid client cert, otherwise Nginx will block the request
 - Note the `/api` endpoint, it will proxy to our private API, which is basically a hello world lambda (see the code in `lambda/index.ts`)
 
-*** What you need to do: ***
+***What you need to do:***
 1. Locate the directive `server_name` directive in `nginx.conf`, and set the domain to the value of domain you set for $DOMAIN_NAME
 2. Locate the directive `proxy_pass` directive in the `/api` section in `nginx.conf`, and change the value to the private API endpoint (Refer to the CDK stack output if you forgot it)
 
@@ -88,14 +88,14 @@ We will use [AWS Systems Manager](https://aws.amazon.com/systems-manager/) to ru
 
 In our CDK stack, we have already created the EC2 role for Systems Manager, so we can run our commands right away.
 
-Go to [Systems Manager Console](https://us-west-2.console.aws.amazon.com/systems-manager/home?region=us-west-2#), we will use *** Run Command *** for this task
+Go to [Systems Manager Console](https://us-west-2.console.aws.amazon.com/systems-manager/home?region=us-west-2#), we will use ***Run Command*** for this task
 
 1. Open 'local/deploy.sh', here is the script we will run on each of our EC2
-2. Before we run it, *** make sure you replace the S3 bucket name with the one in the CDK output ***
+2. Before we run it, ***make sure you replace the S3 bucket name with the one in the CDK output***
 3. Upload the script to our S3 staging bucket with this command: `aws s3 cp local/deploy.sh s3://$S3_BUCKET_NAME/deploy.sh`
 4. Run `echo "https://s3.amazonaws.com/$S3_BUCKET_NAME/deploy.sh"` and copy the value, we will use that in a moment
-5. For <em>'Command Document'</em>, search for *** AWS-RunRemoteScript ***
-6. Select *** S3 *** for <em>"Source Type"</em>
+5. For <em>'Command Document'</em>, search for ***AWS-RunRemoteScript***
+6. Select ***S3*** for <em>"Source Type"</em>
 7. For <em>"Source Info"</em>, enter this:
     {"path": "&lt;paste_your_value_copied_above&gt;"}
 8. Enter `sudo deploy.sh` for <em>"Command Line</em>
